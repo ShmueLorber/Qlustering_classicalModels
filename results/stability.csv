@@ -1,0 +1,33 @@
+dataset,algorithm,n_runs,stability_value,stability_status,stability_notes
+overlap3d_w0.1,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+overlap3d_w0.1,gmm,10,1.0,ok,45 pairwise comparisons over 10 runs
+overlap3d_w0.1,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+overlap3d_w0.1,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+overlap3d_w0.3,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+overlap3d_w0.3,gmm,10,0.761851851851852,ok,45 pairwise comparisons over 10 runs
+overlap3d_w0.3,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+overlap3d_w0.3,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+ipr_gap7,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+ipr_gap7,gmm,10,0.8400000000000003,ok,45 pairwise comparisons over 10 runs
+ipr_gap7,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+ipr_gap7,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+ipr_gap1,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+ipr_gap1,gmm,10,0.7186666666666668,ok,45 pairwise comparisons over 10 runs
+ipr_gap1,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+ipr_gap1,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+iris_full,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+iris_full,gmm,10,1.0,ok,45 pairwise comparisons over 10 runs
+iris_full,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+iris_full,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+iris_reduced,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+iris_reduced,gmm,10,1.0,ok,45 pairwise comparisons over 10 runs
+iris_reduced,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+iris_reduced,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+qm9_q2,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+qm9_q2,gmm,10,0.886368843069874,ok,45 pairwise comparisons over 10 runs
+qm9_q2,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+qm9_q2,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+qm9_q4,spectral,10,1.0,ok,45 pairwise comparisons over 10 runs
+qm9_q4,gmm,10,1.0,ok,45 pairwise comparisons over 10 runs
+qm9_q4,dbscan,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
+qm9_q4,agglomerative,1,1.0,deterministic,"deterministic algorithm: only 1 run was stored (repeated runs on the same data/params are bit-identical by construction, not resampled stochastic evidence)"
