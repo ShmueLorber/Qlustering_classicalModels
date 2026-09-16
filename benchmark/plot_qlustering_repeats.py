@@ -1,8 +1,8 @@
 """
-benchmark.plot_position_repeats -- training-propagation plots for
-qlustering_position_repeats.py's results_qlustering/position_repeats.pkl:
-per-run cost/RI/ARI curves (10 runs overlaid), the run each search stopped
-at (star marker), and the consensus RI/ARI as a reference line.
+benchmark.plot_qlustering_repeats -- training-propagation plots for
+qlustering_repeats.py's results_qlustering/repeats.pkl: per-run cost/RI/ARI
+curves (10 runs overlaid), the iteration each search used (star marker), and
+the paper's reported RI/ARI as a reference line/band where one exists.
 """
 
 import pickle
@@ -12,17 +12,32 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Manuscript-transcribed reference points (see the published "Qlustering
+# Benchmark Matrix" artifact). None where the paper reports no value at all;
+# a (lo, hi) tuple where the text gives only a qualitative range.
 PAPER = {
     'overlap3d_w0.1': {'RI': 1.00, 'ARI': 1.00},
     'overlap3d_w0.3': {'RI': 0.85, 'ARI': 0.63},
+    'ipr_gap7':        {'RI': None, 'ARI': None},
+    'ipr_gap1':        {'RI': (0.7, 0.8), 'ARI': None},
 }
 
 _CMAP = plt.get_cmap('tab10')
 
 
+def _draw_reference(ax, ref, label):
+    if ref is None:
+        return
+    if isinstance(ref, tuple):
+        ax.axhspan(ref[0], ref[1], color='black', alpha=0.08, label=f'paper {label}={ref[0]}-{ref[1]} (qualitative)')
+    else:
+        ax.axhline(ref, color='black', linestyle='--', linewidth=1, label=f'paper {label}={ref}')
+
+
 def plot_dataset(name, data, out_path):
     run_results = data['run_results']
-    consensus_ri, consensus_ari = data['consensus_ri'], data['consensus_ari']
+    cm = data['consensus_metrics']
+    stab = data['stability']
 
     fig, axes = plt.subplots(3, 1, figsize=(10, 9.5), sharex=False)
     ax_cost, ax_ri, ax_ari = axes
@@ -44,21 +59,23 @@ def plot_dataset(name, data, out_path):
     ax_cost.legend(fontsize=7, ncol=2, loc='upper right')
 
     for ax, key in ((ax_ri, 'RI'), (ax_ari, 'ARI')):
-        ax.axhline(PAPER[name][key], color='black', linestyle='--', linewidth=1, label=f"paper {key}={PAPER[name][key]}")
+        _draw_reference(ax, PAPER[name][key], key)
         ax.set_ylim(-0.05, 1.05)
         ax.set_ylabel(key)
         ax.set_title(f'{key} per run (★ = best-found iteration used for that run)')
         ax.grid(True, alpha=0.3)
-        ax.legend(fontsize=8, loc='lower right')
+        if PAPER[name][key] is not None:
+            ax.legend(fontsize=8, loc='lower right')
 
     ax_ari.set_xlabel('search iteration')
 
-    mean_ri = np.mean([r['ri_curve'][r['best_iter']] for r in run_results])
-    mean_ari = np.mean([r['ari_curve'][r['best_iter']] for r in run_results])
+    def _fmt(mr):
+        return f'{mr.value:.3f}' if mr.ok else 'n/a'
+
     fig.suptitle(
-        f'{name}  |  mean best RI={mean_ri:.3f} ARI={mean_ari:.3f}  |  '
-        f'consensus RI={consensus_ri:.3f} ARI={consensus_ari:.3f}  |  '
-        f'paper RI={PAPER[name]["RI"]} ARI={PAPER[name]["ARI"]}',
+        f"{name}  |  consensus RI={_fmt(cm['rand_index'])} ARI={_fmt(cm['adjusted_rand_index'])} "
+        f"CP={_fmt(cm['compactness'])} DVI={_fmt(cm['dunn_index'])} SIL={_fmt(cm['silhouette'])}  |  "
+        f"stability={_fmt(stab)}",
         fontsize=10,
     )
     fig.tight_layout(rect=(0, 0, 1, 0.96))
@@ -67,7 +84,7 @@ def plot_dataset(name, data, out_path):
 
 
 if __name__ == '__main__':
-    with open('results_qlustering/position_repeats.pkl', 'rb') as f:
+    with open('results_qlustering/repeats.pkl', 'rb') as f:
         all_results = pickle.load(f)
 
     for name, data in all_results.items():
