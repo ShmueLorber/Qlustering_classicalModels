@@ -33,10 +33,10 @@ Hamiltonians
 
 Usage
 -----
-    python scripts/liouvillian_gap_vs_size.py verify    # checks vs build_L / H_from_vec
-    python scripts/liouvillian_gap_vs_size.py compute   # resumable, one JSON per task
-    python scripts/liouvillian_gap_vs_size.py analyze   # fits -> results/liouvillian_gap/summary.json
-    python scripts/liouvillian_gap_vs_size.py plot      # analyze + scripts/plot_liouvillian_gap.py
+    python SI/liouvillian_gap_vs_size.py verify    # checks vs build_L / H_from_vec
+    python SI/liouvillian_gap_vs_size.py compute   # resumable, one JSON per task
+    python SI/liouvillian_gap_vs_size.py analyze   # fits -> results/liouvillian_gap/summary.json
+    python SI/liouvillian_gap_vs_size.py plot      # analyze + SI/plot_liouvillian_gap.py
 """
 import os
 import sys
@@ -338,7 +338,7 @@ def fit_config(rs, k, q, n_boot=300):
 # ---------------------------------------------------------------- analyze
 def analyze():
     """Aggregate raw tasks, fit, and write summary.json with every curve the figures need.
-    Drawing lives in scripts/plot_liouvillian_gap.py, which reads only summary.json."""
+    Drawing lives in SI/plot_liouvillian_gap.py, which reads only summary.json."""
     recs = []
     for fn in os.listdir(RAW_DIR):
         if fn.endswith('.json'):

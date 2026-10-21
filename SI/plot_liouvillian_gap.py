@@ -1,11 +1,11 @@
 """
 Figures for the Liouvillian-gap-vs-size study. Reads only
 results/liouvillian_gap/summary.json (written by
-`python scripts/liouvillian_gap_vs_size.py analyze`), so restyling takes ~1 s
+`python SI/liouvillian_gap_vs_size.py analyze`), so restyling takes ~1 s
 and never touches the eigensolves.
 
 Edit the SETTINGS block below and rerun:
-    python scripts/plot_liouvillian_gap.py
+    python SI/plot_liouvillian_gap.py
 
 PDF and SVG are written with real (editable) text, so labels, fonts and
 colors can also be changed afterwards in Inkscape / Illustrator.
